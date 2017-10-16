@@ -437,7 +437,6 @@
   [{sql :query, params :params, remark :remark} timezone connection]
   (let [sql              (str "-- " remark "\n" (hx/unescape-dots sql))
         statement        (into [sql] params)
-        _ (println "SQL: " sql)
         [columns & rows] (jdbc/query connection statement {:identifiers    identity, :as-arrays? true
                                                            :read-columns   (read-columns-with-date-handling timezone)
                                                            :set-parameters (set-parameters-with-timezone timezone)})]
